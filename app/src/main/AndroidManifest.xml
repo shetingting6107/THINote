@@ -33,7 +33,9 @@
         <activity android:name=".MainActivity"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.afu.app.main" />
+                <action android:name="com.afu.app.main"/>
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
@@ -41,6 +43,8 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="com.afu.app.create_item_list" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
@@ -48,6 +52,8 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="com.afu.app.create_item_detail" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>
