@@ -1,4 +1,4 @@
-package com.afu.app;
+package com.afu.app.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,13 +10,24 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.afu.app.Constant;
+import com.afu.app.R;
 import com.afu.app.client.OkhttpPostRequest;
+import com.afu.app.client.OkhttpResponse;
+import com.afu.app.module.LoginResponse;
+import com.afu.app.utls.SPUtils;
+import com.afu.app.utls.ToastUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 
 public class LoginActivity extends Activity {
+
+    private static final String TAG = "LoginActivity";
 
     private EditText et_login_name;
     private EditText et_login_pwd;
@@ -59,14 +70,23 @@ public class LoginActivity extends Activity {
                 param.put("password", pwd);
                 JSONObject json = new JSONObject(param);
                 String response = OkhttpPostRequest.post(url, json.toString());
-                Log.d("POST_RESPONSE", response);
-                if (response.contains("\"code\":200")) {
-                    runOnUiThread(() -> Toast.makeText(LoginActivity.this, "登录成功！", Toast.LENGTH_SHORT).show());
+                Log.d(TAG, "login response = " + response);
+                Gson gson = new Gson();
+                Type type = new TypeToken<OkhttpResponse<LoginResponse>>(){}.getType();
+                OkhttpResponse<LoginResponse> res = gson.fromJson(response, type);
+                if (res != null && res.getCode() == Constant.HTTP_SUCCESS) {
+                    LoginResponse loginResponse = res.getData();
+                    if (loginResponse != null) {
+                        SPUtils.setString(this, Constant.SP_USER_TOKEN, loginResponse.getToken());
+                        SPUtils.setString(this, Constant.SP_USER_ID, loginResponse.getUserid());
+                    }
+                    runOnUiThread(() -> ToastUtils.showToast(LoginActivity.this, "登录成功！", Toast.LENGTH_SHORT));
                     Intent intent = new Intent(Constant.ACTION_MAIN);
                     intent.setPackage(this.getPackageName());
                     this.startActivity(intent);
                 }
             } catch (Exception e) {
+                Log.e(TAG, "login error, msg = " + e.getMessage());
                 e.printStackTrace();
             }
         }).start();

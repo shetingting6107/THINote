@@ -1,4 +1,4 @@
-package com.afu.app;
+package com.afu.app.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
+
+import com.afu.app.R;
 
 /**
  * 首页，登录后进入此页面

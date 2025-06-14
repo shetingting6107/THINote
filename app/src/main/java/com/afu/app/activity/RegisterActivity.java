@@ -1,9 +1,8 @@
-package com.afu.app;
+package com.afu.app.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,13 +10,20 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.afu.app.Constant;
+import com.afu.app.R;
 import com.afu.app.client.OkhttpPostRequest;
+import com.afu.app.client.OkhttpResponse;
+import com.afu.app.utls.ToastUtils;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
 
 public class RegisterActivity extends Activity {
+
+    private static final String TAG = "RegisterActivity";
 
     private TextView tv_back;
     private EditText et_register_name;
@@ -55,15 +61,20 @@ public class RegisterActivity extends Activity {
                 param.put("username", name);
                 param.put("password", pwd);
                 JSONObject json = new JSONObject(param);
-                String response = OkhttpPostRequest.post(url, json.toString());
-                Log.d("POST_RESPONSE", response);
-                if (response.contains("id")) {
-                    runOnUiThread(() -> Toast.makeText(RegisterActivity.this, "注册成功！", Toast.LENGTH_SHORT).show());
+                String responseStr = OkhttpPostRequest.post(url, json.toString());
+                Log.d("POST_RESPONSE", responseStr);
+                Gson gson = new Gson();
+                OkhttpResponse<String> response = gson.fromJson(responseStr, OkhttpResponse.class);
+                if (response != null && response.getCode() == Constant.HTTP_SUCCESS) {
+                    runOnUiThread(() -> ToastUtils.showToast(RegisterActivity.this, "注册成功！", Toast.LENGTH_SHORT));
                     finish();
+                }else {
+                    String msg = response == null ? "response 为空 " : response.getMsg();
+                    runOnUiThread(() -> ToastUtils.showToast(RegisterActivity.this, msg, Toast.LENGTH_SHORT));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                System.err.println("An error occurred: " + e.getMessage());
+                Log.e(TAG, "register error, msg = " + e.getMessage());
             }
         }).start();
     }

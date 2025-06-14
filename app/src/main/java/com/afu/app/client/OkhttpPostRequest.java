@@ -19,7 +19,11 @@ public class OkhttpPostRequest {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            return response.body().string();
+            String result = "";
+            if (response.body() != null) {
+                result = response.body().string();
+            }
+            return result;
         }
     }
 
