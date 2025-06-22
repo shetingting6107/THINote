@@ -1,12 +1,14 @@
 package com.afu.app.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
 
+import com.afu.app.Constant;
 import com.afu.app.R;
 
 /**
@@ -35,11 +37,11 @@ public class MainActivity extends Activity {
         mBtnTalk = findViewById(R.id.btn_talk);
         mBtnMine = findViewById(R.id.btn_mine);
 
-        mBtnMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //跳转至添加物品页面
-            }
+        mBtnMain.setOnClickListener(v -> {
+            //跳转至添加物品页面
+            Intent intent = new Intent(Constant.ACTION_CREATE_ITEM_LIST);
+            intent.setPackage(getPackageName());
+            startActivity(intent);
         });
     }
 
