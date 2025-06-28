@@ -3,8 +3,10 @@
     <string name="back_title">返回</string>
     <string name="login_name">账号名称：</string>
     <string name="login_pwd">密码：</string>
+    <string name="login_email">E-mail：</string>
     <string name="login_name_hint">请输入账号名称</string>
     <string name="login_pwd_hint">请输入密码</string>
+    <string name="login_email_hint">请输入E-mail</string>
     <string name="login_btn">登录</string>
     <string name="register">注册</string>
     <string name="login_title">请登录</string>

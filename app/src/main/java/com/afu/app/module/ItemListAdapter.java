@@ -53,8 +53,8 @@ public class ItemListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ItemViewHolder itemViewHolder = (ItemViewHolder)holder;
             Item item = itemList.get(position);
             itemViewHolder.mTvItemName.setText(item.getItemName());
-//            itemViewHolder.mTvExportTime.setText(DateUtils.transTimeStampToDate(item.getExportTime()));
-//            itemViewHolder.mTvNoticeTime.setText(DateUtils.transTimeStampToDate(item.getNoticeTime()));
+            itemViewHolder.mTvExportTime.setText(DateUtils.transTimeStampToDate(item.getExportTime()));
+            itemViewHolder.mTvNoticeTime.setText(DateUtils.transTimeStampToDate(item.getNoticeTime()));
         }else if (getItemViewType(position) == Item.ITEM_ADD) {
             holder.itemView.setOnClickListener(v -> {
                 //添加物品详情页

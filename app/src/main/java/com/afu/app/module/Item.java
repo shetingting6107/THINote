@@ -9,9 +9,9 @@ public class Item implements Serializable {
 
     private String itemId; //物品id
     private String itemName;//物品名称
-    private String imageUrl;//物品图片地址
-    private Long exportTime;//物品到期时间
-    private Long noticeTime;//物品到期提醒时间
+    private String itemImageUrl;//物品图片地址
+    private Long itemExpireTime;//物品到期时间
+    private Long itemNoticeTime;//物品到期提醒时间
 
     private int itemType = ITEM_NORMAL; //item类型，用于前端显示
 
@@ -32,27 +32,27 @@ public class Item implements Serializable {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return itemImageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+        this.itemImageUrl = imageUrl;
     }
 
     public Long getExportTime() {
-        return exportTime;
+        return itemExpireTime;
     }
 
     public void setExportTime(Long exportTime) {
-        this.exportTime = exportTime;
+        this.itemExpireTime = exportTime;
     }
 
     public Long getNoticeTime() {
-        return noticeTime;
+        return itemNoticeTime;
     }
 
     public void setNoticeTime(Long noticeTime) {
-        this.noticeTime = noticeTime;
+        this.itemNoticeTime = noticeTime;
     }
 
     public int getItemType() {

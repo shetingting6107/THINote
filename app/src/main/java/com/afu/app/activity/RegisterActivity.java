@@ -27,7 +27,8 @@ public class RegisterActivity extends Activity {
 
     private TextView tv_back;
     private EditText et_register_name;
-    private android.widget.EditText et_register_pwd;
+    private EditText et_register_pwd;
+    private EditText et_register_email;
     private Button register_btn;
 
     @Override
@@ -41,6 +42,7 @@ public class RegisterActivity extends Activity {
         tv_back = findViewById(R.id.tv_back);
         et_register_name = findViewById(R.id.et_register_name);
         et_register_pwd = findViewById(R.id.et_register_pwd);
+        et_register_email = findViewById(R.id.et_register_email);
         register_btn = findViewById(R.id.btn_register);
 
         tv_back.setOnClickListener(v -> finish());
@@ -48,11 +50,12 @@ public class RegisterActivity extends Activity {
         register_btn.setOnClickListener(v -> {
             String name = et_register_name.getText().toString();
             String pwd = et_register_pwd.getText().toString();
-            register(name, pwd);
+            String email = et_register_email.getText().toString();
+            register(name, pwd, email);
         });
     }
 
-    private void register(String name, String pwd) {
+    private void register(String name, String pwd, String email) {
         new Thread(() -> {
             try {
 //                String url = "http://192.168.3.32:8082/myapp/api/accounts";
@@ -60,6 +63,7 @@ public class RegisterActivity extends Activity {
                 HashMap<String, String> param = new HashMap<>();
                 param.put("username", name);
                 param.put("password", pwd);
+                param.put("email", email);
                 JSONObject json = new JSONObject(param);
                 String responseStr = OkhttpPostRequest.post(url, json.toString());
                 Log.d("POST_RESPONSE", responseStr);

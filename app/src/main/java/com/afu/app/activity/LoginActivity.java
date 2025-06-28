@@ -84,14 +84,12 @@ public class LoginActivity extends Activity {
                     Intent intent = new Intent(Constant.ACTION_MAIN);
                     intent.setPackage(this.getPackageName());
                     this.startActivity(intent);
+                }else {
+                    runOnUiThread(() -> ToastUtils.showToast(this, res != null ? res.getMsg() : "登录异常！", Toast.LENGTH_SHORT));
                 }
             } catch (Exception e) {
                 Log.e(TAG, "login error, msg = " + e.getMessage());
                 runOnUiThread(() -> ToastUtils.showToast(this, "登录失败！", Toast.LENGTH_SHORT));
-                //TODO:调试数据，无用时记得注释
-                Intent intent = new Intent(Constant.ACTION_MAIN);
-                intent.setPackage(this.getPackageName());
-                this.startActivity(intent);
                 e.printStackTrace();
             }
         }).start();

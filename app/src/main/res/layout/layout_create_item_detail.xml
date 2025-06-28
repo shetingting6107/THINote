@@ -19,7 +19,23 @@
             android:text="@string/back_title"
             android:textSize="@dimen/sp_20"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="添加物品"
+            android:textSize="@dimen/sp_20"
+            android:layout_marginStart="@dimen/dimen_10"/>
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_add_image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_100"
+        android:background="@drawable/round_item_add_background"
+        android:text="选择物品图片"
+        android:textSize="@dimen/sp_20"
+        android:layout_marginBottom="@dimen/dimen_10"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -33,6 +49,32 @@
         android:layout_height="wrap_content"
         android:hint="请输入物品名称"
         android:inputType="text"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="到期时间："
+        android:textSize="17sp"/>
+
+    <EditText
+        android:id="@+id/et_item_expire_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请选择到期时间"
+        android:inputType="text"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="提醒时间："
+        android:textSize="17sp"/>
+
+    <EditText
+        android:id="@+id/et_item_notice_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请选择提醒时间"
+        android:inputType="text" />
 
     <Button
         android:id="@+id/bt_add"
