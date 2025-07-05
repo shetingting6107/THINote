@@ -59,7 +59,7 @@ public class RegisterActivity extends Activity {
         new Thread(() -> {
             try {
 //                String url = "http://192.168.3.32:8082/myapp/api/accounts";
-                String url = "http://192.168.3.65:8080/thiNote_api/user_register";
+                String url = Constant.BASE_URL + "/thiNote_api/user_register";
                 HashMap<String, String> param = new HashMap<>();
                 param.put("username", name);
                 param.put("password", pwd);
@@ -79,6 +79,7 @@ public class RegisterActivity extends Activity {
             } catch (Exception e) {
                 e.printStackTrace();
                 Log.e(TAG, "register error, msg = " + e.getMessage());
+                runOnUiThread(() -> ToastUtils.showToast(RegisterActivity.this, "注册异常, " + e.getMessage(), Toast.LENGTH_SHORT));
             }
         }).start();
     }

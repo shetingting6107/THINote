@@ -14,4 +14,7 @@
     <string name="main_btn_main">首页</string>
     <string name="main_btn_talk">论坛</string>
     <string name="main_btn_mine">我的</string>
+    <string name="item_detail_title_add">添加物品</string>
+    <string name="item_detail_title_edit">编辑物品</string>
+    <string name="item_detail_title">物品详情</string>
 </resources>

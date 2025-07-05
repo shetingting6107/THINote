@@ -133,7 +133,7 @@ public class CreateItemListActivity extends Activity {
     private void getUserAllItem() {
         new Thread(() -> {
             try {
-                String url = "http://192.168.3.65:8080/thiNote_api/item_search";
+                String url = Constant.BASE_URL + "/thiNote_api/item_search";
                 HashMap<String, Object> param = new HashMap<>();
                 String userId = SPUtils.getString(this, Constant.SP_USER_ID);
                 param.put("userId", userId);

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.afu.app.Constant;
 import com.afu.app.R;
+import com.afu.app.activity.CreateItemDetailActivity;
 import com.afu.app.activity.CreateItemListActivity;
 import com.afu.app.utls.DateUtils;
 
@@ -49,17 +50,26 @@ public class ItemListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
         if (getItemViewType(position) == Item.ITEM_NORMAL) {
             ItemViewHolder itemViewHolder = (ItemViewHolder)holder;
             Item item = itemList.get(position);
             itemViewHolder.mTvItemName.setText(item.getItemName());
             itemViewHolder.mTvExportTime.setText(DateUtils.transTimeStampToDate(item.getExportTime()));
             itemViewHolder.mTvNoticeTime.setText(DateUtils.transTimeStampToDate(item.getNoticeTime()));
+            holder.itemView.setOnClickListener(v -> {
+                //添加物品详情页
+                Intent intent = new Intent(Constant.ACTION_CREATE_ITEM_DETAIL);
+                intent.setPackage(mContext.getPackageName());
+                intent.putExtra(CreateItemDetailActivity.EXTRA_ITEM, item);
+                ((Activity)mContext).startActivityForResult(intent, CreateItemListActivity.REQUEST_CODE_ADD);
+            });
         }else if (getItemViewType(position) == Item.ITEM_ADD) {
             holder.itemView.setOnClickListener(v -> {
                 //添加物品详情页
                 Intent intent = new Intent(Constant.ACTION_CREATE_ITEM_DETAIL);
                 intent.setPackage(mContext.getPackageName());
+                intent.putExtra(CreateItemDetailActivity.EXTRA_IS_ADD, true);
                 ((Activity)mContext).startActivityForResult(intent, CreateItemListActivity.REQUEST_CODE_ADD);
             });
         }

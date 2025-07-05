@@ -64,7 +64,7 @@ public class LoginActivity extends Activity {
     private void login(String name, String pwd) {
         new Thread(() -> {
             try {
-                String url = "http://192.168.3.65:8080/thiNote_api/user_login";
+                String url = Constant.BASE_URL + "/thiNote_api/user_login";
                 HashMap<String, String> param = new HashMap<>();
                 param.put("username", name);
                 param.put("password", pwd);
@@ -84,6 +84,7 @@ public class LoginActivity extends Activity {
                     Intent intent = new Intent(Constant.ACTION_MAIN);
                     intent.setPackage(this.getPackageName());
                     this.startActivity(intent);
+                    finish();
                 }else {
                     runOnUiThread(() -> ToastUtils.showToast(this, res != null ? res.getMsg() : "登录异常！", Toast.LENGTH_SHORT));
                 }
